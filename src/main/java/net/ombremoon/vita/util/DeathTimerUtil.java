@@ -2,37 +2,15 @@ package net.ombremoon.vita.util;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.ombremoon.vita.VitaConfig;
 import net.ombremoon.vita.capability.DeathTimerCapabilityProvider;
 import net.ombremoon.vita.common.network.ClientboundTimerSyncMessage;
 import net.ombremoon.vita.common.network.VitaMessages;
 
 public class DeathTimerUtil {
-    public static final int MAX_TIME = 6000;
+    public static final int MAX_TIME = VitaConfig.MAX_TIME.get();
 
-/*    public static void giveSeidrEnergy(Player player, int energyValue) {
-        PlayerSEEvent.SEChange event = new PlayerSEEvent.SEChange(player, energyValue);
-        if ( MinecraftForge.EVENT_BUS.post(event)) return;
-        energyValue = event.getAmount();
-        increaseEnergy(player, energyValue);
-    }
-
-    public static void takeSeidrEnergy(Player player, int energyValue) {
-        PlayerSEEvent.SEChange event = new PlayerSEEvent.SEChange(player, energyValue);
-        if ( MinecraftForge.EVENT_BUS.post(event)) return;
-        energyValue = event.getAmount();
-
-        decreaseEnergy(player, energyValue);
-    }
-
-    public static void setSeidrEnergy(Player player, int energyValue) {
-        PlayerSEEvent.SEChange event = new PlayerSEEvent.SEChange(player, energyValue);
-        if ( MinecraftForge.EVENT_BUS.post(event)) return;
-        energyValue = event.getAmount();
-
-        setEnergy(player, energyValue);
-    }*/
-
-    public static void increaseEnergy(Player player, int deathTime) {
+    public static void increaseTime(Player player, int deathTime) {
         if (!player.level().isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer) player;
             serverPlayer.getCapability(DeathTimerCapabilityProvider.VITA_CAPABILITY).ifPresent(cap -> {
@@ -42,7 +20,7 @@ public class DeathTimerUtil {
         }
     }
 
-    public static void decreaseEnergy(Player player, int deathTime) {
+    public static void decreaseTime(Player player, int deathTime) {
         if (!player.level().isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer) player;
             serverPlayer.getCapability(DeathTimerCapabilityProvider.VITA_CAPABILITY).ifPresent(cap -> {
@@ -52,7 +30,7 @@ public class DeathTimerUtil {
         }
     }
 
-    public static void setEnergy(Player player, int deathTime) {
+    public static void setTime(Player player, int deathTime) {
         if (!player.level().isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer) player;
             serverPlayer.getCapability(DeathTimerCapabilityProvider.VITA_CAPABILITY).ifPresent(cap -> {
@@ -62,7 +40,7 @@ public class DeathTimerUtil {
         }
     }
 
-    public static int getEnergy(Player player) {
+    public static int getTime(Player player) {
         int vitalForce = 0;
         if (!player.level().isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer) player;

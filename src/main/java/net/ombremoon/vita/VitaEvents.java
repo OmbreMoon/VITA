@@ -52,8 +52,8 @@ public class VitaEvents {
             if (!player.isAlive())
                 return;
 
-            DeathTimerUtil.decreaseEnergy(player, 1);
-            if (DeathTimerUtil.getEnergy(player) <= 0) {
+            DeathTimerUtil.decreaseTime(player, 1);
+            if (DeathTimerUtil.getTime(player) <= 0) {
                 DamageSource damageSource = new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(VitaDamageType.FAILURE));
                 player.hurt(damageSource, Float.MAX_VALUE);
             }
@@ -66,14 +66,14 @@ public class VitaEvents {
             if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof Player player) {
                 int i = 600;
                 if (event.getEntity() instanceof Player || event.getEntity() instanceof Warden || event.getEntity() instanceof EnderDragon ||event.getEntity() instanceof WitherBoss) {
-                    DeathTimerUtil.setEnergy(player, DeathTimerUtil.MAX_TIME);
+                    DeathTimerUtil.setTime(player, DeathTimerUtil.MAX_TIME);
                     return;
                 }
 
                 if (event.getEntity() instanceof Monster) {
                     i = 900;
                 }
-                DeathTimerUtil.increaseEnergy(player, i);
+                DeathTimerUtil.increaseTime(player, i);
             }
         }
     }

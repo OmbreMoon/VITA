@@ -9,6 +9,7 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
+import net.ombremoon.vita.VitaConfig;
 import net.ombremoon.vita.VitaMod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +18,7 @@ public class DeathTimerCapabilityProvider implements ICapabilityProvider, INBTSe
     public static final Capability<IDeathCapability> VITA_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
     public static final ResourceLocation VITA_LOCATION = VitaMod.resourceLocation("vita");
 
-    private IDeathCapability deathCapability = new DeathTimerCapabilityHandler(6000);
+    private IDeathCapability deathCapability = new DeathTimerCapabilityHandler(VitaConfig.MAX_TIME.get());
     private final LazyOptional<IDeathCapability> optional = LazyOptional.of(() -> deathCapability);
 
     @Override
