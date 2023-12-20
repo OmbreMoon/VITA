@@ -64,15 +64,18 @@ public class VitaEvents {
     public static void onEntityDeath(LivingDeathEvent event) {
         if (!event.getEntity().level().isClientSide) {
             if (event.getSource().getEntity() != null && event.getSource().getEntity() instanceof Player player) {
-                int i = 600;
+//                float i = 600;
+                int i = 45;
                 if (event.getEntity() instanceof Player || event.getEntity() instanceof Warden || event.getEntity() instanceof EnderDragon ||event.getEntity() instanceof WitherBoss) {
                     DeathTimerUtil.setTime(player, DeathTimerUtil.MAX_TIME);
                     return;
                 }
 
-                if (event.getEntity() instanceof Monster) {
+                i *= event.getEntity().getHealth();
+
+/*                if (event.getEntity() instanceof Monster) {
                     i = 900;
-                }
+                }*/
                 DeathTimerUtil.increaseTime(player, i);
             }
         }
