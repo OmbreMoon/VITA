@@ -71,7 +71,7 @@ public class VitaEvents {
                     return;
                 }
 
-                i *= event.getEntity().getHealth();
+                i *= event.getEntity().getMaxHealth();
 
 /*                if (event.getEntity() instanceof Monster) {
                     i = 900;
